@@ -22,27 +22,21 @@ todoForm.addEventListener('submit', async (e) => {
     const data = new FormData(todoForm);
     const todo = data.get('todo');
     
-    // const todo = {
-    //     text: e.target.elements.text.value,
-    //     completed: false,
-    // };
     await createTodo(todo);
     todos = await getTodos();
-    
+
     todoForm.reset();
     displayTodos();
 });
 
 // create todo state
 let todos = [];
+
 // add async complete todo handler function
     // call completeTodo
     // swap out todo in array
 //     // call displayTodos
-// async function handleTodos() {
-//     completeTodo();
-    
-// }
+// 
 async function handleComplete(todo) {
     // console.log('inside handle complete', todo);
     await completeTodo(todo.id);
@@ -52,36 +46,12 @@ async function handleComplete(todo) {
     displayTodos();
 
 }
-// async function handleTodos(todo, handleComplete) {
-    
-//     const response = await completeTodo(todo.id, update);
-    
-//         if (todo.complete === true) {
-//             return response;
-//         }
-
-//     }
-
-//     displayTodos();
-
 
 async function displayTodos() {
-    // clear the container (.innerHTML = '')
-    // display the list of todos, 
-          // call render function, pass in state and complete handler function!
-          // append to .todos;
     todosEl.innerHTML = '';
-
-    // const todos = await getTodos();
 
     for (let todo of todos) {
         const todoEl = renderTodo(todo, handleComplete);
-
-        // todoEl.addEventListener('click', async () => {
-        //     await completeTodo(todo.id);
-
-        //     displayTodos();
-        // });
         todosEl.append(todoEl);
     }
 

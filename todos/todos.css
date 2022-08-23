@@ -22,6 +22,15 @@
 
 .todo-form button {
     margin-left: 10px;
+    background-color: rgb(255, 200, 50);
+}
+
+.todo-form button:hover {
+    background-color: rgb(226, 174, 29);
+}
+
+.todo-form button:active {
+    transform: scale(.98);
 }
 
 .todo {
@@ -35,6 +44,14 @@
     cursor: pointer;
 }
 
+.incomplete:hover {
+    background-color: aquamarine;
+}
+
+.incomplete:active {
+    transform: scale(.98);
+}
+
 .complete {
     text-decoration: line-through;
     background-color: lightgreen;
@@ -44,4 +61,12 @@
     background-color: crimson;
     margin: 20px;
     font-size: 1.3rem;
+}
+
+.delete-button:hover {
+    background-color: rgb(196, 21, 56);
+}
+
+.delete-button:active {
+    transform: scale(.98);
 }
