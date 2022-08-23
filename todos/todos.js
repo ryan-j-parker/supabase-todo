@@ -21,18 +21,20 @@ todoForm.addEventListener('submit', async (e) => {
 
     const data = new FormData(todoForm);
     const todo = data.get('todo');
+    
     // const todo = {
     //     text: e.target.elements.text.value,
     //     completed: false,
     // };
     await createTodo(todo);
+    todos = await getTodos();
     
     todoForm.reset();
     displayTodos();
 });
 
 // create todo state
-let todoArr = [];
+let todos = [];
 // add async complete todo handler function
     // call completeTodo
     // swap out todo in array
@@ -41,6 +43,26 @@ let todoArr = [];
 //     completeTodo();
     
 // }
+async function handleComplete(todo) {
+    // console.log('inside handle complete', todo);
+    await completeTodo(todo.id);
+
+    todos = await getTodos();
+
+    displayTodos();
+
+}
+// async function handleTodos(todo, handleComplete) {
+    
+//     const response = await completeTodo(todo.id, update);
+    
+//         if (todo.complete === true) {
+//             return response;
+//         }
+
+//     }
+
+//     displayTodos();
 
 
 async function displayTodos() {
@@ -50,16 +72,16 @@ async function displayTodos() {
           // append to .todos;
     todosEl.innerHTML = '';
 
-    const todos = await getTodos();
+    // const todos = await getTodos();
 
     for (let todo of todos) {
-        const todoEl = renderTodo(todo);
+        const todoEl = renderTodo(todo, handleComplete);
 
-        todoEl.addEventListener('click', async () => {
-            await completeTodo(todo.id);
+        // todoEl.addEventListener('click', async () => {
+        //     await completeTodo(todo.id);
 
-            displayTodos();
-        });
+        //     displayTodos();
+        // });
         todosEl.append(todoEl);
     }
 
@@ -70,9 +92,13 @@ async function displayTodos() {
     // fetch the todos and store in state
     // call displayTodos
 
-window.addEventListener('load', async () => {
+async function onLoad() {
+    todos = await getTodos();
     displayTodos();
-});
+    handleComplete();
+}
+
+onLoad();
 
 logoutButton.addEventListener('click', () => {
     logout();
@@ -83,7 +109,7 @@ deleteButton.addEventListener('click', async () => {
     // delete all todos
     await deleteAllTodos();
     // // modify state to match
-    // todoArr = [];
+    todos = [];
     // re displayTodos
     displayTodos();
 });

@@ -16,10 +16,11 @@ export function renderTodo(todo, handleComplete) {
     todoPTag.textContent = todo.todo;
     // append stuff
     todoDiv.append(todoPTag);
-    console.log(todo);
+    
     // add event listener for click and call handleComplete function
     todoDiv.addEventListener('click', () => {
-        handleComplete();
+
+        handleComplete(todo);
     });
     // return the div
     return todoDiv;
